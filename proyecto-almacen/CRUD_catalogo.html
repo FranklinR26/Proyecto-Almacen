@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CRUD Catálogo - Almacén Pro</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+  <div class="app">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div>
+        <div class="brand">
+          <div class="logo"><i class="fas fa-warehouse"></i></div>
+          <h3>Almacén Pro</h3>
+        </div>
+        <nav class="nav">
+          <a href="index.html"><i class="fas fa-home"></i><span>Inicio</span></a>
+          <a href="catalogo.html"><i class="fas fa-boxes"></i><span>Lista de Catálogo</span></a>
+          <a href="CRUD_catalogo.html" class="active"><i class="fas fa-edit"></i><span>Gestión de Catálogo</span></a>
+          <a href="CRUD_producto.html"><i class="fas fa-box"></i><span>Gestión de Producto</span></a>
+          <a href="metricas.html"><i class="fas fa-chart-line"></i><span>Métricas</span></a>
+          <a href="gestion.html"><i class="fas fa-tasks"></i><span>Gestión de inventario</span></a>
+          <a href="publicidad.html"><i class="fas fa-ad"></i><span>Publicidad</span></a>
+          <a href="perfil.html"><i class="fas fa-user"></i><span>Perfil</span></a>
+          <a href="contacto.html"><i class="fas fa-envelope"></i><span>Contacto</span></a>
+          <a href="ayuda.html"><i class="fas fa-question-circle"></i><span>Ayuda</span></a>
+        </nav>
+      </div>
+      <div class="profile-mini">
+        <div class="avatar-sm">JP</div>
+        <div>
+          <div style="font-weight:700">Juan Pérez</div>
+          <div style="font-size:0.82rem;color:#dfe7ff">Almacenero</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+      <div class="topbar">
+        <div class="page-title">
+          <h2><i class="fas fa-edit" style="color:var(--panel-start)"></i> Gestión del Catálogo</h2>
+        </div>
+      </div>
+
+      <!-- Formulario para agregar categoría -->
+      <section class="card">
+        <h3>Registrar nueva categoría</h3>
+        <form id="formCatalogo" class="form-grid">
+          <div class="form-group">
+            <label for="codigoC">Código de categoría</label>
+            <input id="codigoC" type="text" placeholder="Ej: C001" required />
+          </div>
+          <div class="form-group">
+            <label for="nombreC">Nombre de la categoría</label>
+            <input id="nombreC" type="text" placeholder="Ej: Accesorios" required />
+          </div>
+          <div class="form-group" style="grid-column:1/3">
+            <label for="descripcionC">Descripción</label>
+            <textarea id="descripcionC" rows="2" placeholder="Ej: Dispositivos periféricos y accesorios de computadora"></textarea>
+          </div>
+          <div style="display:flex;align-items:end">
+            <button class="btn" type="submit">Guardar categoría</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- Tabla del catálogo -->
+      <section class="card">
+        <h3 style="color:var(--panel-start)">Categorías registradas</h3>
+        <div class="table-wrap">
+          <table id="tblCatalogo">
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Nombre de Categoría</th>
+                <th>Descripción</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>C001</td>
+                <td>Accesorios</td>
+                <td>Periféricos y artículos complementarios</td>
+                <td>
+                  <button class="btn" style="background:#dc3545"><i class="fas fa-trash"></i> Eliminar</button>
+                </td>
+              </tr>
+              <tr>
+                <td>C002</td>
+                <td>Computadoras</td>
+                <td>Equipos portátiles y de escritorio</td>
+                <td>
+                  <button class="btn" style="background:#dc3545"><i class="fas fa-trash"></i> Eliminar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Formulario de edición (maqueta visual) -->
+      <section class="card">
+        <h3>Editar categoría</h3>
+        <form class="form-grid">
+          <div class="form-group">
+            <label for="codigoEditar">Seleccionar categoría</label>
+            <select id="codigoEditar">
+              <option value="C001">C001 - Accesorios</option>
+              <option value="C002">C002 - Computadoras</option>
+            </select>
+          </div>
+          <div class="form-group"><label for="nombreEditar">Nombre</label><input id="nombreEditar" type="text" value="Accesorios" /></div>
+          <div class="form-group" style="grid-column:1/3">
+            <label for="descripcionEditar">Descripción</label>
+            <textarea id="descripcionEditar" rows="2">Periféricos y artículos complementarios</textarea>
+          </div>
+          <div style="display:flex;align-items:end">
+            <button class="btn" type="button">Guardar cambios</button>
+          </div>
+        </form>
+      </section>
+
+      <footer class="app-footer card">© 2025 Sistema de Almacén</footer>
+    </main>
+  </div>
+</body>
+</html>

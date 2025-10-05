@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Gestión - Almacén Pro</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div>
+      <div class="brand"><div class="logo"><i class="fas fa-warehouse"></i></div><h3>Almacén Pro</h3></div>
+      <nav class="nav">
+        <a href="index.html"><i class="fas fa-home"></i><span>Inicio</span></a>
+        <a href="catalogo.html"><i class="fas fa-boxes"></i><span>Lista de Catálogo</span></a>
+        <a href="CRUD_catalogo.html"><i class="fas fa-edit"></i><span>Gestion de Catálogo</span></a>
+        <a href="CRUD_producto.html"><i class="fas fa-box"></i><span>Gestión de Producto</span></a>
+        <a href="metricas.html"><i class="fas fa-chart-line"></i><span>Métricas</span></a>
+        <a href="gestion.html" class="active"><i class="fas fa-tasks"></i><span>Gestión de inventario</span></a>
+        <a href="publicidad.html"><i class="fas fa-ad"></i><span>Publicidad</span></a>
+        <a href="perfil.html"><i class="fas fa-user"></i><span>Perfil</span></a>
+        <a href="contacto.html"><i class="fas fa-envelope"></i><span>Contacto</span></a>
+        <a href="ayuda.html"><i class="fas fa-question-circle"></i><span>Ayuda</span></a>
+      </nav>
+    </div>
+    <div class="profile-mini"><div class="avatar-sm">JP</div><div style="font-size:0.95rem"><div style="font-weight:700">Juan Pérez</div><div style="font-size:0.82rem;color:#dfe7ff">Almacenero</div></div></div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar"><div class="page-title"><h2><i class="fas fa-tasks" style="color:var(--panel-start)"></i> Gestión de Inventario</h2></div></div>
+
+    <section class="card">
+      <div style="display:flex;gap:14px;flex-wrap:wrap">
+        <div style="flex:1;min-width:300px">
+          <h4>Registrar Entrada</h4>
+          <form id="formEntrada">
+            <div class="form-group"><label for="codigoE">Código del Producto</label><input id="codigoE" type="text" required/></div>
+            <div class="form-group"><label for="cantidadE">Cantidad</label><input id="cantidadE" type="number" min="1" value="1" required/></div>
+            <div class="form-group"><label for="almaceneroE">Almacenero Responsable</label><input id="almaceneroE" type="text" value="Juan Pérez" required/></div>
+            <div style="margin-top:8px"><button class="btn" type="submit">Registrar Entrada</button></div>
+          </form>
+        </div>
+
+        <div style="flex:1;min-width:300px">
+          <h4>Registrar Salida</h4>
+          <form id="formSalida">
+            <div class="form-group"><label for="codigoS">Código del Producto</label><input id="codigoS" type="text" required/></div>
+            <div class="form-group"><label for="cantidadS">Cantidad</label><input id="cantidadS" type="number" min="1" value="1" required/></div>
+            <div class="form-group"><label for="almaceneroS">Almacenero Responsable</label><input id="almaceneroS" type="text" value="Juan Pérez" required/></div>
+            <div style="margin-top:8px"><button class="btn" type="submit">Registrar Salida</button></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h4>Movimientos recientes</h4>
+      <div class="table-wrap">
+        <table id="tblMovimientos">
+          <thead><tr><th>Tipo</th><th>Detalle</th><th>Fecha</th></tr></thead>
+          <tbody>
+            <tr><td>Entrada</td><td>15 monitores</td><td>03/09/2025</td></tr>
+            <tr><td>Salida</td><td>5 laptops</td><td>04/09/2025</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer class="app-footer card">© 2025 Sistema de Almacén</footer>
+  </main>
+</div>
+</html>

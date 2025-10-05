@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Perfil - Almacén Pro</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <style>
+    /* Formulario de edición */
+    .form-editar {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      padding: 14px;
+      margin-top: 10px;
+    }
+    .form-editar h4 {
+      color: var(--panel);
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div>
+      <div class="brand">
+        <div class="logo"><i class="fas fa-warehouse"></i></div>
+        <h3>Almacén Pro</h3>
+      </div>
+      <nav class="nav">
+        <a href="index.html"><i class="fas fa-home"></i><span>Inicio</span></a>
+        <a href="catalogo.html"><i class="fas fa-boxes"></i><span>Lista de Catálogo</span></a>
+        <a href="CRUD_catalogo.html"><i class="fas fa-edit"></i><span>Gestion de Catálogo</span></a>
+        <a href="CRUD_producto.html"><i class="fas fa-box"></i><span>Gestión de Producto</span></a>
+        <a href="metricas.html"><i class="fas fa-chart-line"></i><span>Métricas</span></a>
+        <a href="gestion.html"><i class="fas fa-tasks"></i><span>Gestión de inventario</span></a>
+        <a href="publicidad.html"><i class="fas fa-ad"></i><span>Publicidad</span></a>
+        <a href="perfil.html" class="active"><i class="fas fa-user"></i><span>Perfil</span></a>
+        <a href="contacto.html"><i class="fas fa-envelope"></i><span>Contacto</span></a>
+        <a href="ayuda.html"><i class="fas fa-question-circle"></i><span>Ayuda</span></a>
+      </nav>
+    </div>
+    <div class="profile-mini">
+      <div class="avatar-sm">JP</div>
+      <div style="font-size:0.95rem">
+        <div style="font-weight:700">Juan Pérez</div>
+        <div style="font-size:0.82rem;color:#dfe7ff">Administrador</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="topbar">
+      <div class="page-title">
+        <h2><i class="fas fa-user" style="color:var(--panel-start)"></i> Perfil del Usuario</h2>
+      </div>
+    </div>
+
+    <!-- PERFIL -->
+    <section class="card">
+      <div class="profile-hero">
+        <div class="avatar">JP</div>
+        <div class="profile-info">
+          <h3>Juan Pérez</h3>
+          <div style="color:var(--muted)">Administrador</div>
+          <div class="kv" style="margin-top:12px">
+            <div class="item"><strong>Correo:</strong> juanperez@empresa.com</div>
+            <div class="item"><strong>Rol:</strong> Administrador</div>
+            <div class="item"><strong>Fecha de registro:</strong> 01/09/2025</div>
+          </div>
+
+          <p style="margin-top:10px; font-size:0.9rem; color:var(--muted)">
+            Este usuario posee permisos de <strong>Administrador</strong> para gestionar usuarios y productos.
+          </p>
+
+          <div style="margin-top:14px">
+            <button class="btn" style="background:#dc3545">
+              <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GESTIÓN DE USUARIOS -->
+    <section class="card">
+      <h4>Usuarios registrados recientemente</h4>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>ID</th><th>Nombre</th><th>Correo</th><th>Rol</th><th>Fecha</th><th>Acción</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>U001</td><td>Juan Pérez</td><td>juanperez@empresa.com</td><td>Administrador</td><td>01/09/2025</td>
+              <td><button class="btn" style="background:#dc3545"><i class="fas fa-trash"></i></button></td>
+            </tr>
+            <tr>
+              <td>U002</td><td>María López</td><td>marialopez@empresa.com</td><td>Administrador</td><td>05/09/2025</td>
+              <td><button class="btn" style="background:#dc3545"><i class="fas fa-trash"></i></button></td>
+            </tr>
+            <tr>
+              <td>U003</td><td>Carlos Ramos</td><td>carlosramos@empresa.com</td><td>Administrador</td><td>10/09/2025</td>
+              <td><button class="btn" style="background:#dc3545"><i class="fas fa-trash"></i></button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- FORMULARIO DE EDICIÓN SIMULADO -->
+      <div class="form-editar">
+        <h4>Editar Usuario</h4>
+        <form class="form-grid">
+          <div class="form-group">
+            <label for="codigoU">Código de Usuario</label>
+            <select id="codigoU">
+              <option value="U001" selected>U001 - Juan Pérez</option>
+              <option value="U002">U002 - María López</option>
+              <option value="U003">U003 - Carlos Ramos</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="nombreU">Nombre</label>
+            <input id="nombreU" type="text" value="Juan Pérez">
+          </div>
+          <div class="form-group">
+            <label for="correoU">Correo</label>
+            <input id="correoU" type="email" value="juanperez@empresa.com">
+          </div>
+          <div class="form-group">
+            <label for="rolU">Rol</label>
+            <select id="rolU">
+              <option selected>Administrador</option>
+              <option>Almacenero</option>
+              <option>Invitado</option>
+            </select>
+          </div>
+          <div style="display:flex;align-items:end">
+            <button class="btn">Guardar cambios</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <footer class="app-footer card">© 2025 Sistema de Almacén</footer>
+  </main>
+</div>
+</body>
+</html>

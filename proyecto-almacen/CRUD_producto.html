@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>CRUD Producto - Almacén Pro</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+<body>
+<div class="app">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div>
+      <div class="brand"><div class="logo"><i class="fas fa-warehouse"></i></div><h3>Almacén Pro</h3></div>
+      <nav class="nav">
+        <a href="index.html"><i class="fas fa-home"></i><span>Inicio</span></a>
+        <a href="catalogo.html"><i class="fas fa-boxes"></i><span>Lista de Catálogo</span></a>
+        <a href="CRUD_catalogo.html"><i class="fas fa-edit"></i><span>Gestión de Catálogo</span></a>
+        <a href="CRUD_producto.html" class="active"><i class="fas fa-box"></i><span>Gestión de Producto</span></a>
+        <a href="metricas.html"><i class="fas fa-chart-line"></i><span>Métricas</span></a>
+        <a href="gestion.html"><i class="fas fa-tasks"></i><span>Gestión de inventario</span></a>
+        <a href="publicidad.html"><i class="fas fa-ad"></i><span>Publicidad</span></a>
+        <a href="perfil.html"><i class="fas fa-user"></i><span>Perfil</span></a>
+        <a href="contacto.html"><i class="fas fa-envelope"></i><span>Contacto</span></a>
+        <a href="ayuda.html"><i class="fas fa-question-circle"></i><span>Ayuda</span></a>
+      </nav>
+    </div>
+    <div class="profile-mini">
+      <div class="avatar-sm">JP</div>
+      <div>
+        <div style="font-weight:700">Juan Pérez</div>
+        <div style="font-size:0.82rem;color:#dfe7ff">Almacenero</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="main">
+    <div class="topbar">
+      <div class="page-title">
+        <h2><i class="fas fa-box" style="color:var(--panel-start)"></i> Gestión de Producto</h2>
+      </div>
+    </div>
+
+    <!-- Formulario Producto -->
+    <section class="card">
+      <h3>Registrar / Editar Producto</h3>
+      <form id="formProducto" class="form-grid">
+        <div class="form-group"><label for="codigo">Código</label><input id="codigo" type="text" required/></div>
+        <div class="form-group"><label for="nombre">Nombre</label><input id="nombre" type="text" required/></div>
+        <div class="form-group">
+          <label for="categoria">Categoría</label>
+          <select id="categoria">
+            <option value="Accesorios">Accesorios</option>
+            <option value="Computadoras">Computadoras</option>
+            <option value="Monitores">Monitores</option>
+          </select>
+        </div>
+        <div class="form-group"><label for="precio">Precio (S/)</label><input id="precio" type="number" step="0.01"/></div>
+        <div class="form-group"><label for="descripcion">Descripción</label><textarea id="descripcion" rows="2"></textarea></div>
+        <div style="display:flex;align-items:end">
+          <button class="btn" type="submit">Guardar producto</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Tabla Productos -->
+    <section class="card">
+      <h3>Productos registrados</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Código</th><th>Nombre</th><th>Categoría</th><th>Precio</th><th>Acciones</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>P001</td><td>Mouse inalámbrico</td><td>Accesorios</td><td>45.00</td>
+              <td>
+                <button class="btn" style="background:#dc3545"><i class="fas fa-trash"></i> Eliminar</button>
+              </td>
+            </tr>
+            <tr>
+              <td>P002</td><td>Laptop HP</td><td>Computadoras</td><td>2500.00</td>
+              <td>
+                <button class="btn" style="background:#dc3545"><i class="fas fa-trash"></i> Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Sección visual para edición -->
+    <section class="card">
+      <h3>Editar producto </h3>
+      <form class="form-grid">
+        <div class="form-group"><label for="codigoEditar">Código</label>
+          <select id="codigoEditar">
+            <option>P001</option>
+            <option>P002</option>
+          </select>
+        </div>
+        <div class="form-group"><label for="nombreEditar">Nombre</label><input id="nombreEditar" type="text" value="Mouse inalámbrico"/></div>
+        <div class="form-group">
+          <label for="categoriaEditar">Categoría</label>
+          <select id="categoriaEditar">
+            <option>Accesorios</option>
+            <option>Computadoras</option>
+          </select>
+        </div>
+        <div class="form-group"><label for="precioEditar">Precio (S/)</label><input id="precioEditar" type="number" step="0.01" value="45.00"/></div>
+        <div class="form-group"><label for="descripcionEditar">Descripción</label><textarea id="descripcionEditar" rows="2">Mouse inalámbrico óptico con receptor USB</textarea></div>
+        <div style="display:flex;align-items:end">
+          <button class="btn" type="button">Guardar cambios</button>
+        </div>
+      </form>
+    </section>
+
+    <footer class="app-footer card">© 2025 Sistema de Almacén</footer>
+  </main>
+</div>
+</body>
+</html>
