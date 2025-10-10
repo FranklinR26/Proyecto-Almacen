@@ -26,6 +26,7 @@
         <a href="gestion.html"><i class="fas fa-tasks"></i><span>Gestión de Inventario</span></a>
         <a href="publicidad.html"><i class="fas fa-ad"></i><span>Publicidad</span></a>
         <a href="perfil.html"><i class="fas fa-user"></i><span>Perfil</span></a>
+        <a href="contacto.html"><i class="fas fa-envelope"></i><span>Contacto</span></a>
         <a href="ayuda.html"><i class="fas fa-question-circle"></i><span>Ayuda</span></a>
       </nav>
     </div>
@@ -46,7 +47,6 @@
         <p class="subtitle">Control de movimientos y estado del inventario</p>
       </div>
       <div class="header-actions">
-        <button class="btn-icon"><i class="fas fa-download"></i></button>
         <button class="btn"><i class="fas fa-calendar-alt"></i> Filtrar</button>
       </div>
     </div>
@@ -56,18 +56,18 @@
       <div class="summary-card card-primary">
         <div class="summary-icon"><i class="fas fa-arrow-down"></i></div>
         <div class="summary-content">
-          <p class="summary-label">Entradas del Mes</p>
+          <p class="summary-label">Entradas por Mes</p>
           <h2 class="summary-value">1,847</h2>
-          <span class="summary-badge positive"><i class="fas fa-arrow-up"></i> 12.5%</span>
+          <span class="summary-badge positive"><i class="fas fa-arrow-up"></i> +12%</span>
         </div>
       </div>
 
       <div class="summary-card card-warning">
         <div class="summary-icon"><i class="fas fa-arrow-up"></i></div>
         <div class="summary-content">
-          <p class="summary-label">Salidas del Mes</p>
+          <p class="summary-label">Salidas por Mes</p>
           <h2 class="summary-value">1,248</h2>
-          <span class="summary-badge positive"><i class="fas fa-arrow-up"></i> 8.3%</span>
+          <span class="summary-badge negative"><i class="fas fa-arrow-down"></i> -8%</span>
         </div>
       </div>
 
@@ -76,60 +76,38 @@
         <div class="summary-content">
           <p class="summary-label">Stock Actual</p>
           <h2 class="summary-value">8,432</h2>
-          <span class="summary-badge positive"><i class="fas fa-arrow-up"></i> 4.2%</span>
-        </div>
-      </div>
-
-      <div class="summary-card card-info">
-        <div class="summary-icon"><i class="fas fa-users"></i></div>
-        <div class="summary-content">
-          <p class="summary-label">Almaceneros Activos</p>
-          <h2 class="summary-value">12</h2>
-          <span class="summary-badge positive"><i class="fas fa-check"></i> Activos</span>
+          <span class="summary-badge positive"><i class="fas fa-arrow-up"></i> +4%</span>
         </div>
       </div>
     </div>
 
     <!-- Gráficos -->
     <div class="charts-grid">
+      <!-- Entradas por mes -->
       <div class="chart-card">
         <div class="chart-header">
-          <div>
-            <h3><i class="fas fa-exchange-alt"></i> Entradas vs Salidas</h3>
-            <p class="chart-subtitle">Movimientos mensuales del almacén</p>
-          </div>
+          <h3><i class="fas fa-arrow-down"></i> Entradas por Mes</h3>
+          <p class="chart-subtitle">(Ingresos mensuales)</p>
         </div>
-        <div class="chart-body"><canvas id="entradasSalidas"></canvas></div>
+        <div class="chart-body"><canvas id="entradasChart"></canvas></div>
       </div>
 
+      <!-- Salidas por mes -->
       <div class="chart-card">
         <div class="chart-header">
-          <div>
-            <h3><i class="fas fa-layer-group"></i> Productos por Categoría</h3>
-            <p class="chart-subtitle">Distribución del inventario actual</p>
-          </div>
+          <h3><i class="fas fa-arrow-up"></i> Salidas por Mes</h3>
+          <p class="chart-subtitle">(Egresos mensuales)</p>
         </div>
-        <div class="chart-body"><canvas id="categorias"></canvas></div>
+        <div class="chart-body"><canvas id="salidasChart"></canvas></div>
       </div>
 
+      <!-- Stock actual -->
       <div class="chart-card">
         <div class="chart-header">
-          <div>
-            <h3><i class="fas fa-chart-line"></i> Stock Mensual</h3>
-            <p class="chart-subtitle">Evolución del inventario</p>
-          </div>
+          <h3><i class="fas fa-boxes"></i> Stock por Mes</h3>
+          <p class="chart-subtitle">(Valor del inventario mensual)</p>
         </div>
-        <div class="chart-body"><canvas id="stockMensual"></canvas></div>
-      </div>
-
-      <div class="chart-card">
-        <div class="chart-header">
-          <div>
-            <h3><i class="fas fa-user-check"></i> Movimientos por Usuario</h3>
-            <p class="chart-subtitle">Operaciones registradas por almacenero</p>
-          </div>
-        </div>
-        <div class="chart-body"><canvas id="movimientosUsuario"></canvas></div>
+        <div class="chart-body"><canvas id="stockChart"></canvas></div>
       </div>
     </div>
   </main>
@@ -139,99 +117,51 @@
   Chart.defaults.font.family = 'Arial, sans-serif';
   Chart.defaults.color = '#666';
 
-  // Entradas vs Salidas
-  new Chart(document.getElementById('entradasSalidas'), {
-    type: 'line',
+  const meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'];
+
+  // Entradas por mes
+  new Chart(document.getElementById('entradasChart'), {
+    type: 'bar',
     data: {
-      labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+      labels: meses,
       datasets: [{
         label: 'Entradas',
         data: [1200, 1550, 1300, 1700, 1600, 1847],
-        borderColor: '#27ae60',
-        backgroundColor: 'rgba(39, 174, 96, 0.1)',
-        borderWidth: 3,
-        tension: 0.4,
-        fill: true
-      }, {
-        label: 'Salidas',
-        data: [800, 900, 700, 1100, 1000, 1248],
-        borderColor: '#e74c3c',
-        backgroundColor: 'rgba(231, 76, 60, 0.1)',
-        borderWidth: 3,
-        tension: 0.4,
-        fill: true
+        backgroundColor: '#27ae60'
       }]
     },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: { 
-        y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.05)' } },
-        x: { grid: { display: false } }
-      }
-    }
+    options: { responsive: true, maintainAspectRatio: false }
   });
 
-  // Productos por Categoría
-  new Chart(document.getElementById('categorias'), {
-    type: 'doughnut',
-    data: {
-      labels: ['Electrónicos', 'Ropa', 'Hogar', 'Deportes', 'Juguetes'],
-      datasets: [{
-        data: [2500, 1800, 1600, 1200, 1332],
-        backgroundColor: ['#8B2E3C', '#F7C778', '#27ae60', '#3498db', '#9b59b6']
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: { legend: { position: 'bottom' } }
-    }
-  });
-
-  // Stock Mensual
-  new Chart(document.getElementById('stockMensual'), {
+  // Salidas por mes
+  new Chart(document.getElementById('salidasChart'), {
     type: 'bar',
     data: {
-      labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+      labels: meses,
+      datasets: [{
+        label: 'Salidas',
+        data: [800, 900, 700, 1100, 1000, 1248],
+        backgroundColor: '#e74c3c'
+      }]
+    },
+    options: { responsive: true, maintainAspectRatio: false }
+  });
+
+  // Stock actual
+  new Chart(document.getElementById('stockChart'), {
+    type: 'line',
+    data: {
+      labels: meses,
       datasets: [{
         label: 'Stock',
         data: [7800, 8450, 8050, 8650, 8250, 8432],
-        backgroundColor: '#8B2E3C',
-        borderRadius: 6
+        borderColor: '#166497',
+        backgroundColor: 'rgba(22, 100, 151, 0.6)',
+        fill: true,
+        tension: 0.3
       }]
     },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      scales: { 
-        y: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.05)' } },
-        x: { grid: { display: false } }
-      }
-    }
-  });
-
-  // Movimientos por Usuario
-  new Chart(document.getElementById('movimientosUsuario'), {
-    type: 'bar',
-    data: {
-      labels: ['Juan P.', 'María G.', 'Carlos R.', 'Ana M.', 'Luis F.'],
-      datasets: [{
-        label: 'Movimientos',
-        data: [245, 198, 187, 165, 142],
-        backgroundColor: ['#8B2E3C', '#F7C778', '#27ae60', '#3498db', '#9b59b6'],
-        borderRadius: 6
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      indexAxis: 'y',
-      scales: { 
-        x: { beginAtZero: true, grid: { color: 'rgba(0,0,0,0.05)' } },
-        y: { grid: { display: false } }
-      }
-    }
+    options: { responsive: true, maintainAspectRatio: false }
   });
 </script>
 </body>
