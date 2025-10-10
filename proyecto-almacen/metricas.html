@@ -56,7 +56,7 @@
       <div class="summary-card card-primary">
         <div class="summary-icon"><i class="fas fa-arrow-down"></i></div>
         <div class="summary-content">
-          <p class="summary-label">Entradas por Mes</p>
+          <p class="summary-label">Ingresos por Mes</p>
           <h2 class="summary-value">1,847</h2>
           <span class="summary-badge positive"><i class="fas fa-arrow-up"></i> +12%</span>
         </div>
@@ -65,7 +65,7 @@
       <div class="summary-card card-warning">
         <div class="summary-icon"><i class="fas fa-arrow-up"></i></div>
         <div class="summary-content">
-          <p class="summary-label">Salidas por Mes</p>
+          <p class="summary-label">Egresos por Mes</p>
           <h2 class="summary-value">1,248</h2>
           <span class="summary-badge negative"><i class="fas fa-arrow-down"></i> -8%</span>
         </div>
@@ -74,7 +74,7 @@
       <div class="summary-card card-success">
         <div class="summary-icon"><i class="fas fa-boxes"></i></div>
         <div class="summary-content">
-          <p class="summary-label">Stock Actual</p>
+          <p class="summary-label">Cantidad de productos ingresados este mes</p>
           <h2 class="summary-value">8,432</h2>
           <span class="summary-badge positive"><i class="fas fa-arrow-up"></i> +4%</span>
         </div>
@@ -86,8 +86,7 @@
       <!-- Entradas por mes -->
       <div class="chart-card">
         <div class="chart-header">
-          <h3><i class="fas fa-arrow-down"></i> Entradas por Mes</h3>
-          <p class="chart-subtitle">(Ingresos mensuales)</p>
+          <h3><i class="fas fa-arrow-down"></i> Ingresos mensuales</h3>
         </div>
         <div class="chart-body"><canvas id="entradasChart"></canvas></div>
       </div>
@@ -95,8 +94,7 @@
       <!-- Salidas por mes -->
       <div class="chart-card">
         <div class="chart-header">
-          <h3><i class="fas fa-arrow-up"></i> Salidas por Mes</h3>
-          <p class="chart-subtitle">(Egresos mensuales)</p>
+          <h3><i class="fas fa-arrow-up"></i>Egresos mensuales</h3>
         </div>
         <div class="chart-body"><canvas id="salidasChart"></canvas></div>
       </div>
@@ -104,8 +102,7 @@
       <!-- Stock actual -->
       <div class="chart-card">
         <div class="chart-header">
-          <h3><i class="fas fa-boxes"></i> Stock por Mes</h3>
-          <p class="chart-subtitle">(Valor del inventario mensual)</p>
+          <h3><i class="fas fa-boxes"></i> Cantidad de productos que ingresaron</h3>
         </div>
         <div class="chart-body"><canvas id="stockChart"></canvas></div>
       </div>
@@ -125,7 +122,7 @@
     data: {
       labels: meses,
       datasets: [{
-        label: 'Entradas',
+        label: 'Ingresos',
         data: [1200, 1550, 1300, 1700, 1600, 1847],
         backgroundColor: '#27ae60'
       }]
@@ -139,7 +136,7 @@
     data: {
       labels: meses,
       datasets: [{
-        label: 'Salidas',
+        label: 'Egresos',
         data: [800, 900, 700, 1100, 1000, 1248],
         backgroundColor: '#e74c3c'
       }]
@@ -153,7 +150,7 @@
     data: {
       labels: meses,
       datasets: [{
-        label: 'Stock',
+        label: 'Cantidad',
         data: [7800, 8450, 8050, 8650, 8250, 8432],
         borderColor: '#166497',
         backgroundColor: 'rgba(22, 100, 151, 0.6)',

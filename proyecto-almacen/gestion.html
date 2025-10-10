@@ -35,7 +35,12 @@
         <div style="flex:1;min-width:300px">
           <h4>Registrar Entrada</h4>
           <form id="formEntrada">
-            <div class="form-group"><label for="codigoE">Código del Producto</label><input id="codigoE" type="text" required/></div>
+            <div class="form-group">
+              <label for="codigoE">Código del Producto</label>
+              <select id="codigoE">
+              <option>P001</option>
+              <option>P002</option>
+              </select></div>
             <div class="form-group"><label for="cantidadE">Cantidad</label><input id="cantidadE" type="number" min="1" value="1" required/></div>
             <div class="form-group"><label for="almaceneroE">Almacenero Responsable</label><input id="almaceneroE" type="text" value="Juan Pérez" required/></div>
             <div style="margin-top:8px"><button class="btn" type="submit">Registrar Entrada</button></div>
@@ -45,7 +50,11 @@
         <div style="flex:1;min-width:300px">
           <h4>Registrar Salida</h4>
           <form id="formSalida">
-            <div class="form-group"><label for="codigoS">Código del Producto</label><input id="codigoS" type="text" required/></div>
+            <div class="form-group"><label for="codigoS">Código del Producto</label>
+              <select id="codigoE">
+              <option>P001</option>
+              <option>P002</option>
+              </select></div>
             <div class="form-group"><label for="cantidadS">Cantidad</label><input id="cantidadS" type="number" min="1" value="1" required/></div>
             <div class="form-group"><label for="almaceneroS">Almacenero Responsable</label><input id="almaceneroS" type="text" value="Juan Pérez" required/></div>
             <div style="margin-top:8px"><button class="btn" type="submit">Registrar Salida</button></div>
