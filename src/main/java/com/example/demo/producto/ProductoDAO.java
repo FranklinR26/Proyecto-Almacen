@@ -8,5 +8,4 @@ public interface ProductoDAO {
     void crearProducto(Producto producto);
     void eliminarProducto(String idProducto);
     void actualizarProducto(Producto producto);
-    List<Producto> buscarPorCodigoONombre(String query);
 }

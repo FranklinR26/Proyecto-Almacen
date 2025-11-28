@@ -38,8 +38,4 @@ public class ProductoServiceImpl implements ProductoService {
         productoDAO.actualizarProducto(producto);
     }
 
-    @Override
-    public List<Producto> buscarPorCodigoONombre(String query) {
-        return productoDAO.buscarPorCodigoONombre(query);
-    }
 }

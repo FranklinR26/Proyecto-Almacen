@@ -1,6 +1,6 @@
 package com.example.demo.producto;
 
-import com.example.demo.categoria.CategoriaService; // ✅ importa el servicio correcto
+import com.example.demo.categoria.CategoriaService; 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -52,13 +52,6 @@ public class ProductoController {
     public String actualizarProducto(@ModelAttribute Producto producto) {
         productoService.actualizarProducto(producto);
         return "redirect:/producto/list";
-    }
-
-    @GetMapping("/buscar")
-    @ResponseBody
-    public List<Producto> buscarProductos(@RequestParam("q") String query) {
-        // busca productos que contengan el texto ingresado
-        return productoService.buscarPorCodigoONombre(query);
     }
 
 }
