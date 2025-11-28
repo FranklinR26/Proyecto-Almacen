@@ -36,18 +36,35 @@ public class MovimientoInventarioController {
             @RequestParam String tipo,
             @RequestParam int cantidad,
             @RequestParam String idProducto,
-            @RequestParam String idUsuario
+            @RequestParam String idUsuario,
+            Model model,
+            HttpSession session
     ) {
-        MovimientoInventario movimiento = new MovimientoInventario(
-                UUID.randomUUID().toString().substring(0, 8), // genera id simple
-                tipo,
-                cantidad,
-                LocalDateTime.now(),
-                idProducto,
-                idUsuario
-        );
-        movimientoService.registrarMovimiento(movimiento);
-        return "redirect:/movimientos/list";
+        try {
+            MovimientoInventario movimiento = new MovimientoInventario(
+                    UUID.randomUUID().toString().substring(0, 8),
+                    tipo,
+                    cantidad,
+                    LocalDateTime.now(),
+                    idProducto,
+                    idUsuario
+            );
+
+            movimientoService.registrarMovimiento(movimiento);
+            return "redirect:/movimientos/list";
+
+        } catch (IllegalArgumentException e) {
+
+            // Volvemos a cargar todo lo necesario para que el JSP funcione
+            model.addAttribute("movimientos", movimientoService.listarMovimientos());
+            model.addAttribute("idUsuario", session.getAttribute("idUsuario"));
+            model.addAttribute("nombreUsuario", session.getAttribute("nombreUsuario"));
+
+            // enviamos el mensaje
+            model.addAttribute("error", e.getMessage());
+
+            return "gestion"; // volver al JSP con el error visible
+        }
     }
 
     @GetMapping("/eliminar/{id}")

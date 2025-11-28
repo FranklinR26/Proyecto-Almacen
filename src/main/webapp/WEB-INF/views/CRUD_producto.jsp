@@ -102,11 +102,7 @@
                  value="${producto.precio}" required/>
         </div>
 
-        <div class="form-group">
-          <label for="stock">Stock</label>
-          <input id="stock" name="stock" type="number" min="0"
-                value="${producto.stock}" required/>
-        </div>
+        <!-- STOCK ELIMINADO -->
 
         <div class="form-group">
           <label for="descripcion">Descripción</label>
@@ -139,7 +135,7 @@
               <th>Nombre</th>
               <th>Categoría</th>
               <th>Precio</th>
-              <th>Stock</th>
+              <!-- STOCK ELIMINADO -->
               <th>Acciones</th>
             </tr>
           </thead>
@@ -156,7 +152,9 @@
                   </c:forEach>
                 </td>
                 <td>${p.precio}</td>
-                <td>${p.stock}</td>
+
+                <!-- STOCK ELIMINADO -->
+
                 <td style="display:flex; gap:5px;">
                   <a href="<c:url value='/producto/editar/${p.idProducto}'/>" class="btn" style="background:#007bff">
                     <i class="fas fa-pen"></i> Editar

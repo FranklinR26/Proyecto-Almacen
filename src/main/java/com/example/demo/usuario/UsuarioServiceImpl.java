@@ -39,13 +39,16 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public void actualizarUsuario(Usuario usuario) {
-        // Buscar si existe otro usuario con ese correo
         Usuario porCorreo = usuarioDAO.obtenerPorCorreo(usuario.getCorreo());
-        if (porCorreo != null && !porCorreo.getIdUsuario().equals(usuario.getIdUsuario())) {
-            // Hay otro usuario con el mismo correo -> lanzar excepción controlada
-            throw new IllegalArgumentException("El correo '" + usuario.getCorreo() + "' ya está en uso por otro usuario.");
+
+        // Solo lanzar excepción si existe otro usuario distinto con ese correo
+        if (porCorreo != null && !porCorreo.getIdUsuario().trim().equals(usuario.getIdUsuario().trim())) {
+            throw new IllegalArgumentException(
+                "El correo '" + usuario.getCorreo() + "' ya está en uso por otro usuario."
+            );
         }
-        // Si todo ok, actualizar
+
+        // Actualizar normalmente
         usuarioDAO.actualizarUsuario(usuario);
     }
 

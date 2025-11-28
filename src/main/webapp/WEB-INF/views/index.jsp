@@ -61,22 +61,39 @@
     <!-- Estadísticas principales -->
     <section class="card">
       <div class="card-row">
+
         <div class="stat">
           <div class="icon"><i class="fas fa-boxes" style="color:#112f91"></i></div>
-          <div class="info"><h3 id="stat-prod">1,248</h3><div style="color:var(--muted)">Productos en stock</div></div>
+          <div class="info">
+            <h3 id="stat-prod">${totalProductos}</h3>
+            <div style="color:var(--muted)">Productos en stock</div>
+          </div>
         </div>
+
         <div class="stat">
           <div class="icon"><i class="fas fa-exclamation-triangle" style="color:#8B2E3C"></i></div>
-          <div class="info"><h3 id="stat-low">7</h3><div style="color:var(--muted)">Productos con stock bajo</div></div>
+          <div class="info">
+            <h3 id="stat-low">${stockBajo}</h3>
+            <div style="color:var(--muted)">Productos con stock bajo</div>
+          </div>
         </div>
+
         <div class="stat">
           <div class="icon"><i class="fas fa-clipboard-list" style="color:#dabd19"></i></div>
-          <div class="info"><h3>56</h3><div style="color:var(--muted)">Pedidos este mes</div></div>
+          <div class="info">
+            <h3>56</h3>
+            <div style="color:var(--muted)">Pedidos este mes</div>
+          </div>
         </div>
+
         <div class="stat">
           <div class="icon"><i class="fas fa-check-circle" style="color:#27ae60"></i></div>
-          <div class="info"><h3>12</h3><div style="color:var(--muted)">Tareas pendientes</div></div>
+          <div class="info">
+            <h3>12</h3>
+            <div style="color:var(--muted)">Tareas pendientes</div>
+          </div>
         </div>
+
       </div>
     </section>
 
@@ -86,19 +103,34 @@
         <h3 style="color:var(--panel-start)">Actividad reciente</h3>
         <a class="btn ghost" href="<c:url value='/movimientos/list'/>">Ver todas</a>
       </div>
+
       <div style="margin-top:12px">
         <table>
-          <thead><tr><th>Actividad</th><th>Detalle</th><th>Fecha</th></tr></thead>
+          <thead>
+            <tr>
+              <th>Actividad</th>
+              <th>Detalle</th>
+              <th>Fecha</th>
+            </tr>
+          </thead>
+
           <tbody>
-            <tr><td>Entrada de productos</td><td>15 monitores ingresados</td><td>Hace 2 horas</td></tr>
-            <tr><td>Salida de productos</td><td>5 laptops enviadas</td><td>Ayer 14:30</td></tr>
-            <tr><td>Nuevo producto</td><td>Teclados mecánicos agregados</td><td>05/09/2025</td></tr>
+            <c:forEach var="m" items="${ultimosMovimientos}">
+              <tr>
+                <td>${m.tipoMovimiento}</td>
+                <td>${m.cantidad} unidades</td>
+                <td>${m.fecha}</td>
+              </tr>
+            </c:forEach>
           </tbody>
+
         </table>
       </div>
     </section>
 
-    <footer class="app-footer card">© 2025 Sistema de Almacén - Todos los derechos reservados</footer>
+    <footer class="app-footer card">
+      © 2025 Sistema de Almacén - Todos los derechos reservados
+    </footer>
   </main>
 </div>
 </body>

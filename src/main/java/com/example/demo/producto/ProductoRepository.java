@@ -71,4 +71,17 @@ public class ProductoRepository implements ProductoDAO {
         return jdbcTemplate.query(sql, productoRowMapper, likeQuery, likeQuery);
     }
 
+    @Override
+    public int contarProductos() {
+        String sql = "SELECT COUNT(*) FROM producto WHERE estado = TRUE";
+        Integer total = jdbcTemplate.queryForObject(sql, Integer.class);
+        return total != null ? total : 0;
+    }
+
+    @Override
+    public int contarStockBajo(int limite) {
+        String sql = "SELECT COUNT(*) FROM producto WHERE stock <= ? AND estado = TRUE";
+        Integer total = jdbcTemplate.queryForObject(sql, Integer.class, limite);
+        return total != null ? total : 0;
+    }
 }

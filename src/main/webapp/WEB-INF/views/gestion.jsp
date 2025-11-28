@@ -51,11 +51,38 @@
     <!-- MAIN -->
     <main class="main">
         <div class="topbar">
-            <div class="page-title">
+                        <div class="page-title">
                 <h2><i class="fas fa-tasks" style="color:var(--panel-start)"></i> Gestión de Inventario</h2>
             </div>
         </div>
 
+        <c:if test="${not empty error}">
+            <div style="
+                background: #ffcccc;
+                color: #900;
+                border: 1px solid #e5b3b3;
+                padding: 12px 18px;
+                border-radius: 6px;
+                position: relative;
+                margin-bottom: 12px;
+            ">
+                ${error}
+        
+                <!-- Botón X -->
+                <span onclick="this.parentElement.style.display='none';" 
+                    style="
+                        position: absolute;
+                        top: 8px;
+                        right: 12px;
+                        cursor: pointer;
+                        font-weight: bold;
+                    ">
+                    ×
+                </span>
+            </div>
+        </c:if>
+        
+        
         <!-- Formulario para registrar entrada -->
         <section class="card">
             <div style="display:flex;gap:14px;flex-wrap:wrap">
