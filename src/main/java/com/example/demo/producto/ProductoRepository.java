@@ -70,5 +70,4 @@ public class ProductoRepository implements ProductoDAO {
         String likeQuery = "%" + query + "%";
         return jdbcTemplate.query(sql, productoRowMapper, likeQuery, likeQuery);
     }
-
 }

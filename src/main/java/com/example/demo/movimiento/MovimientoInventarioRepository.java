@@ -31,9 +31,14 @@ public class MovimientoInventarioRepository implements MovimientoInventarioDAO {
         return jdbcTemplate.query(sql, movimientoRowMapper);
     }
 
-    /**
-     * 🔹 Obtiene el stock actual de un producto por su ID.
-     */
+    // 🔍 Verifica si el producto existe
+    private boolean productoExiste(String idProducto) {
+        String sql = "SELECT COUNT(*) FROM producto WHERE id_producto = ?";
+        Integer count = jdbcTemplate.queryForObject(sql, Integer.class, idProducto);
+        return count != null && count > 0;
+    }
+
+    // 🔍 Obtiene el stock actual
     private int obtenerStockActual(String idProducto) {
         String sql = "SELECT stock FROM producto WHERE id_producto = ?";
         Integer stock = jdbcTemplate.queryForObject(sql, Integer.class, idProducto);
@@ -42,7 +47,15 @@ public class MovimientoInventarioRepository implements MovimientoInventarioDAO {
 
     @Override
     public void registrarMovimiento(MovimientoInventario movimiento) {
-        // 🔹 1. Generar código automático (formato M000001)
+
+        // ❗ 1. Validar que el producto exista
+        if (!productoExiste(movimiento.getIdProducto())) {
+            throw new IllegalArgumentException(
+                "El producto con ID '" + movimiento.getIdProducto() + "' no existe en la base de datos."
+            );
+        }
+
+        // 🔹 2. Generar código automático
         String sqlUltimo = "SELECT id_movimiento FROM movimiento_inventario ORDER BY id_movimiento DESC LIMIT 1";
         String ultimoCodigo = jdbcTemplate.query(sqlUltimo, rs -> rs.next() ? rs.getString(1) : null);
 
@@ -55,23 +68,26 @@ public class MovimientoInventarioRepository implements MovimientoInventarioDAO {
         }
         movimiento.setIdMovimiento(nuevoCodigo);
 
-        // 🔹 2. Validar tipo de movimiento
+        // 🔹 3. Validar tipo
         String tipo = movimiento.getTipoMovimiento().toLowerCase();
         if (!tipo.equals("entrada") && !tipo.equals("salida")) {
             throw new IllegalArgumentException("Tipo de movimiento no válido: " + movimiento.getTipoMovimiento());
         }
 
-        // 🔹 3. Validar stock si es salida
+        // ❗ 4. Validar stock si es salida
         int stockActual = obtenerStockActual(movimiento.getIdProducto());
         if (tipo.equals("salida") && movimiento.getCantidad() > stockActual) {
-            throw new IllegalArgumentException("Stock insuficiente. Solo hay " + stockActual + " unidades disponibles.");
+            throw new IllegalArgumentException(
+                "Stock insuficiente. Solo hay " + stockActual + " unidades disponibles."
+            );
         }
 
-        // 🔹 4. Registrar movimiento
+        // 🔹 5. Registrar movimiento
         String sqlInsert = """
             INSERT INTO movimiento_inventario (id_movimiento, tipo_movimiento, cantidad, fecha, id_producto, id_usuario)
             VALUES (?, ?, ?, ?, ?, ?)
         """;
+
         jdbcTemplate.update(sqlInsert,
             movimiento.getIdMovimiento(),
             movimiento.getTipoMovimiento(),
@@ -81,7 +97,7 @@ public class MovimientoInventarioRepository implements MovimientoInventarioDAO {
             movimiento.getIdUsuario()
         );
 
-        // 🔹 5. Actualizar stock del producto
+        // 🔹 6. Actualizar stock
         String sqlUpdateStock = tipo.equals("entrada")
                 ? "UPDATE producto SET stock = stock + ? WHERE id_producto = ?"
                 : "UPDATE producto SET stock = stock - ? WHERE id_producto = ?";
@@ -95,9 +111,8 @@ public class MovimientoInventarioRepository implements MovimientoInventarioDAO {
         jdbcTemplate.update(sql, idMovimiento);
     }
 
-    /**
-     * Obtiene los ingresos por mes (tipo 'Entrada') agrupados por año y mes.
-     */
+    // ---- MÉTRICAS ----
+
     public List<MetricaMensualDTO> obtenerIngresosPorMes() {
         String sql = "SELECT EXTRACT(YEAR FROM fecha) AS anio, EXTRACT(MONTH FROM fecha) AS mes, SUM(cantidad) AS total " +
                 "FROM movimiento_inventario WHERE tipo_movimiento = 'Entrada' " +
@@ -111,9 +126,6 @@ public class MovimientoInventarioRepository implements MovimientoInventarioDAO {
         );
     }
 
-    /**
-     * Obtiene los egresos por mes (tipo 'Salida') agrupados por año y mes.
-     */
     public List<MetricaMensualDTO> obtenerEgresosPorMes() {
         String sql = "SELECT EXTRACT(YEAR FROM fecha) AS anio, EXTRACT(MONTH FROM fecha) AS mes, SUM(cantidad) AS total " +
                 "FROM movimiento_inventario WHERE tipo_movimiento = 'Salida' " +
@@ -127,9 +139,6 @@ public class MovimientoInventarioRepository implements MovimientoInventarioDAO {
         );
     }
 
-    /**
-     * Valor de productos ingresados por mes (dinero)
-     */
     public List<MetricaMensualDTO> obtenerValorIngresosPorMes() {
         String sql = "SELECT EXTRACT(YEAR FROM fecha) AS anio, EXTRACT(MONTH FROM fecha) AS mes, SUM(mi.cantidad * p.precio) AS total " +
                 "FROM movimiento_inventario mi JOIN producto p ON mi.id_producto = p.id_producto " +
@@ -144,9 +153,6 @@ public class MovimientoInventarioRepository implements MovimientoInventarioDAO {
         );
     }
 
-    /**
-     * Valor de productos egresados por mes (dinero)
-     */
     public List<MetricaMensualDTO> obtenerValorEgresosPorMes() {
         String sql = "SELECT EXTRACT(YEAR FROM fecha) AS anio, EXTRACT(MONTH FROM fecha) AS mes, SUM(mi.cantidad * p.precio) AS total " +
                 "FROM movimiento_inventario mi JOIN producto p ON mi.id_producto = p.id_producto " +
@@ -161,9 +167,6 @@ public class MovimientoInventarioRepository implements MovimientoInventarioDAO {
         );
     }
 
-    /**
-     * Cantidad de productos que ingresaron al mes (cantidad)
-     */
     public List<MetricaMensualDTO> obtenerCantidadIngresosPorMes() {
         String sql = "SELECT EXTRACT(YEAR FROM fecha) AS anio, EXTRACT(MONTH FROM fecha) AS mes, SUM(cantidad) AS total " +
                 "FROM movimiento_inventario WHERE tipo_movimiento = 'Entrada' " +
@@ -177,9 +180,6 @@ public class MovimientoInventarioRepository implements MovimientoInventarioDAO {
         );
     }
 
-    /**
-     * Valor total del almacén (stock actual * precio de cada producto)
-     */
     public double obtenerValorTotalAlmacen() {
         String sql = "SELECT SUM(stock * precio) AS total FROM producto WHERE estado = TRUE";
         Double total = jdbcTemplate.queryForObject(sql, Double.class);

@@ -51,55 +51,163 @@
   <!-- Main -->
   <main class="main">
     <div class="topbar">
-      <div class="page-title"><h2><i class="fas fa-home" style="color:var(--panel-start)"></i> Panel</h2></div>
+      <div class="page-title"><h2><i class="fas fa-home" style="color:var(--panel-start)"></i> Panel de Bienvenida</h2></div>
       <div class="top-actions">
         <button class="btn"><i class="fas fa-bell"></i> Notificaciones</button>
         <button class="btn secondary"><i class="fas fa-user-cog"></i> Config</button>
       </div>
     </div>
 
-    <!-- Estadísticas principales -->
-    <section class="card">
-      <div class="card-row">
-        <div class="stat">
-          <div class="icon"><i class="fas fa-boxes" style="color:#112f91"></i></div>
-          <div class="info"><h3 id="stat-prod">1,248</h3><div style="color:var(--muted)">Productos en stock</div></div>
+    <!-- Bienvenida -->
+    <section class="welcome-section">
+      <div class="welcome-message">
+        <h2>¡Bienvenido a Almacén Pro!</h2>
+        <p>Gestiona tu inventario de manera eficiente con nuestro sistema fácil de usar.</p>
+      </div>
+    </section>
+
+    <!-- Características Principales -->
+    <section class="features">
+      <h3>Características Principales</h3>
+      <div class="features-list">
+        <div class="feature-item">
+          <i class="fas fa-boxes"></i>
+          <h4>Gestión de Catálogo</h4>
+          <p>Organiza productos en categorías para una búsqueda más rápida.</p>
         </div>
-        <div class="stat">
-          <div class="icon"><i class="fas fa-exclamation-triangle" style="color:#8B2E3C"></i></div>
-          <div class="info"><h3 id="stat-low">7</h3><div style="color:var(--muted)">Productos con stock bajo</div></div>
+        <div class="feature-item">
+          <i class="fas fa-tasks"></i>
+          <h4>Gestión de Productos</h4>
+          <p>Administra tu stock y visualiza el inventario en tiempo real.</p>
         </div>
-        <div class="stat">
-          <div class="icon"><i class="fas fa-clipboard-list" style="color:#dabd19"></i></div>
-          <div class="info"><h3>56</h3><div style="color:var(--muted)">Pedidos este mes</div></div>
-        </div>
-        <div class="stat">
-          <div class="icon"><i class="fas fa-check-circle" style="color:#27ae60"></i></div>
-          <div class="info"><h3>12</h3><div style="color:var(--muted)">Tareas pendientes</div></div>
+        <div class="feature-item">
+          <i class="fas fa-chart-line"></i>
+          <h4>Reportes de Métricas</h4>
+          <p>Obtén análisis detallados sobre el estado de tu inventario.</p>
         </div>
       </div>
     </section>
 
-    <!-- Actividad reciente -->
-    <section class="card">
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <h3 style="color:var(--panel-start)">Actividad reciente</h3>
-        <a class="btn ghost" href="<c:url value='/movimientos/list'/>">Ver todas</a>
-      </div>
-      <div style="margin-top:12px">
-        <table>
-          <thead><tr><th>Actividad</th><th>Detalle</th><th>Fecha</th></tr></thead>
-          <tbody>
-            <tr><td>Entrada de productos</td><td>15 monitores ingresados</td><td>Hace 2 horas</td></tr>
-            <tr><td>Salida de productos</td><td>5 laptops enviadas</td><td>Ayer 14:30</td></tr>
-            <tr><td>Nuevo producto</td><td>Teclados mecánicos agregados</td><td>05/09/2025</td></tr>
-          </tbody>
-        </table>
-      </div>
+    <!-- Guías rápidas -->
+    <section class="quick-guides">
+      <h3>Guías Rápidas</h3>
+      <ul>
+        <li><a href="<c:url value='/categoria/list'/>">Crear una nueva categoría</a></li>
+        <li><a href="<c:url value='/producto/list'/>">Ver y gestionar productos</a></li>
+        <li><a href="<c:url value='/metricas'/>">Consultar métricas de inventario</a></li>
+      </ul>
     </section>
 
-    <footer class="app-footer card">© 2025 Sistema de Almacén - Todos los derechos reservados</footer>
+    <footer class="app-footer card">
+      © 2025 Sistema de Almacén - Todos los derechos reservados
+    </footer>
   </main>
 </div>
+
+<!-- Estilos adicionales (no usar JS para mayor simplicidad) -->
+<style>
+  .welcome-section {
+    text-align: center;
+    margin: 30px 0;
+    padding: 20px;
+    background: #f7f7f7;
+    border-radius: 8px;
+  }
+
+  .welcome-message h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .welcome-message p {
+    font-size: 1.1rem;
+    color: #555;
+  }
+
+  .features {
+    margin-top: 40px;
+  }
+
+  .features h3 {
+    font-size: 1.5rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .features-list {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+
+  .feature-item {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 250px;
+    margin: 10px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .feature-item i {
+    font-size: 2rem;
+    color: #4CAF50;
+    margin-bottom: 10px;
+  }
+
+  .feature-item h4 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: #333;
+  }
+
+  .feature-item p {
+    font-size: 1rem;
+    color: #666;
+  }
+
+  .quick-guides {
+    margin-top: 40px;
+    padding: 20px;
+    background: #f7f7f7;
+    border-radius: 8px;
+  }
+
+  .quick-guides h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 15px;
+  }
+
+  .quick-guides ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .quick-guides ul li {
+    margin: 10px 0;
+  }
+
+  .quick-guides ul li a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 1.1rem;
+  }
+
+  .quick-guides ul li a:hover {
+    color: #0056b3;
+  }
+
+  footer.app-footer {
+    margin-top: 40px;
+    text-align: center;
+    background-color: #f7f7f7;
+    padding: 15px;
+    color: #777;
+  }
+</style>
 </body>
 </html>

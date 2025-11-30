@@ -114,48 +114,52 @@
       </table>
     </section>
 
-    <!-- FORMULARIO DE EDICIÓN -->
-    <section class="form-editar">
-      <h4>Editar Usuario</h4>
-      <form method="post" action="<c:url value='/usuarios/editar'/>">
-        <label>Código de Usuario</label>
-        <select id="selectUsuario" name="idUsuario" onchange="actualizarCampos()">
-          <c:forEach var="u" items="${usuarios}">
-            <option value="${u.idUsuario}" 
-              data-nombre="${u.nombre}" 
-              data-correo="${u.correo}" 
-              data-rol="${u.rol}">
-              ${u.idUsuario} - ${u.nombre}
-            </option>
-          </c:forEach>
-        </select>
+<!-- FORMULARIO DE EDICIÓN -->
+<section class="form-editar">
+  <h4>Editar Usuario</h4>
+  <form method="post" action="<c:url value='/usuarios/editar'/>">
+    <!-- Input oculto para enviar siempre el idUsuario -->
+    <input type="hidden" name="idUsuario" id="idUsuarioHidden" value="${usuario.idUsuario}" />
 
-        <label>Nombre</label>
-        <input type="text" id="nombre" name="nombre" value="${usuario.nombre}"/>
+    <label>Seleccionar Usuario</label>
+    <select id="selectUsuario" name="selectUsuario" onchange="actualizarCampos()">
+      <c:forEach var="u" items="${usuarios}">
+        <option value="${u.idUsuario}" 
+          data-nombre="${u.nombre}" 
+          data-correo="${u.correo}" 
+          data-rol="${u.rol}">
+          ${u.idUsuario} - ${u.nombre}
+        </option>
+      </c:forEach>
+    </select>
 
-        <label>Correo</label>
-        <input type="email" id="correo" name="correo" value="${usuario.correo}"/>
+    <label>Nombre</label>
+    <input type="text" id="nombre" name="nombre" value="${usuario.nombre}"/>
 
-        <label>Rol</label>
-        <input type="text" id="rol" name="rol" value="${usuario.rol}"/>
+    <label>Correo</label>
+    <input type="email" id="correo" name="correo" value="${usuario.correo}"/>
 
-        <button type="submit" class="btn" style="background:var(--panel);margin-top:10px;">Guardar cambios</button>
-      </form>
-    </section>
+    <label>Rol</label>
+    <input type="text" id="rol" name="rol" value="${usuario.rol}"/>
 
-    <footer class="app-footer card">© 2025 Sistema de Almacén</footer>
-  </main>
-</div>
+    <button type="submit" class="btn" style="background:var(--panel);margin-top:10px;">
+      Guardar cambios
+    </button>
+  </form>
+</section>
 
-<!-- ======== JAVASCRIPT ======== -->
 <script>
   // Llenar campos al cambiar usuario
   function actualizarCampos() {
     const select = document.getElementById("selectUsuario");
     const option = select.options[select.selectedIndex];
+
     document.getElementById("nombre").value = option.getAttribute("data-nombre");
     document.getElementById("correo").value = option.getAttribute("data-correo");
     document.getElementById("rol").value = option.getAttribute("data-rol");
+
+    // Actualizar el input oculto con el id del usuario seleccionado
+    document.getElementById("idUsuarioHidden").value = option.value;
   }
 
   // Confirmar y eliminar usuario
@@ -165,5 +169,3 @@
     }
   }
 </script>
-</body>
-</html>
