@@ -77,5 +77,4 @@ public class ProductoRepository implements ProductoDAO {
         List<Producto> result = jdbcTemplate.query(sql, productoRowMapper, nombre);
         return result.isEmpty() ? null : result.get(0);
     }
-
 }
