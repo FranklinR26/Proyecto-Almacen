@@ -64,4 +64,18 @@ public class ProductoRepository implements ProductoDAO {
         );
     }
 
+    @Override
+    public Producto obtenerPorIdIncluyendoInactivos(String idProducto) {
+        String sql = "SELECT * FROM producto WHERE id_producto = ?";
+        List<Producto> result = jdbcTemplate.query(sql, productoRowMapper, idProducto);
+        return result.isEmpty() ? null : result.get(0);
+    }
+
+    @Override
+    public Producto obtenerPorNombreIncluyendoInactivos(String nombre) {
+        String sql = "SELECT * FROM producto WHERE LOWER(nombre) = LOWER(?)";
+        List<Producto> result = jdbcTemplate.query(sql, productoRowMapper, nombre);
+        return result.isEmpty() ? null : result.get(0);
+    }
+
 }

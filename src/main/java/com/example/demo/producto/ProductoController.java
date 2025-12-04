@@ -4,6 +4,8 @@ import com.example.demo.categoria.CategoriaService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import java.util.List;
 
 @Controller
@@ -27,10 +29,16 @@ public class ProductoController {
     }
 
     @PostMapping("/crear")
-    public String crearProducto(@ModelAttribute Producto producto) {
-        productoService.crearProducto(producto);
+    public String crearProducto(@ModelAttribute Producto producto, RedirectAttributes attr) {
+        try {
+            productoService.crearProducto(producto);
+            attr.addFlashAttribute("success", "Producto creado correctamente.");
+        } catch (IllegalStateException e) {
+            attr.addFlashAttribute("error", e.getMessage());
+        }
         return "redirect:/producto/list";
     }
+
 
     @GetMapping("/eliminar/{id}")
     public String eliminarProducto(@PathVariable("id") String idProducto) {

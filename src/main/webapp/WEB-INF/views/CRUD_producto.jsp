@@ -6,8 +6,33 @@
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>CRUD Producto - Almacén Pro</title>
+
   <link rel="stylesheet" href="<c:url value='/css/styles.css'/>"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+  <style>
+    .alert {
+      padding: 10px 15px;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      font-weight: 600;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    .alert-success {
+      background: #d1f7d7;
+      border-left: 5px solid #28a745;
+      color: #155724;
+    }
+    .alert-danger {
+      background: #ffd2d2;
+      border-left: 5px solid #dc3545;
+      color: #721c24;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+  </style>
 </head>
 <body>
 <div class="app">
@@ -53,6 +78,14 @@
         <h2><i class="fas fa-box" style="color:var(--panel-start)"></i> Gestión de Producto</h2>
       </div>
     </div>
+
+    <!-- MENSAJES -->
+    <c:if test="${not empty success}">
+      <div class="alert alert-success">${success}</div>
+    </c:if>
+    <c:if test="${not empty error}">
+      <div class="alert alert-danger">${error}</div>
+    </c:if>
 
     <!-- Formulario Producto -->
     <section class="card">
@@ -102,8 +135,6 @@
                  value="${producto.precio}" required/>
         </div>
 
-        <!-- STOCK ELIMINADO -->
-
         <div class="form-group">
           <label for="descripcion">Descripción</label>
           <textarea id="descripcion" name="descripcion" rows="2">${producto.descripcion}</textarea>
@@ -135,7 +166,6 @@
               <th>Nombre</th>
               <th>Categoría</th>
               <th>Precio</th>
-              <!-- STOCK ELIMINADO -->
               <th>Acciones</th>
             </tr>
           </thead>
@@ -152,9 +182,6 @@
                   </c:forEach>
                 </td>
                 <td>${p.precio}</td>
-
-                <!-- STOCK ELIMINADO -->
-
                 <td style="display:flex; gap:5px;">
                   <a href="<c:url value='/producto/editar/${p.idProducto}'/>" class="btn" style="background:#007bff">
                     <i class="fas fa-pen"></i> Editar

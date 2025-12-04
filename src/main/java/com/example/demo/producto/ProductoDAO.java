@@ -8,4 +8,6 @@ public interface ProductoDAO {
     void crearProducto(Producto producto);
     void eliminarProducto(String idProducto);
     void actualizarProducto(Producto producto);
+    Producto obtenerPorIdIncluyendoInactivos(String idProducto);
+    Producto obtenerPorNombreIncluyendoInactivos(String nombre);
 }

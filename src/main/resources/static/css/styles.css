@@ -585,3 +585,112 @@ tr:hover { background: var(--accent); }
   .metricas-header { flex-direction: column; gap: 12px; }
   .metrics-summary { grid-template-columns: 1fr; }
 }
+
+/* =========================
+   ESTILOS PARA LA PÁGINA HOME
+   ========================= */
+
+.welcome {
+    background: var(--card);
+    padding: 24px;
+    border-radius: 12px;
+    border-left: 4px solid var(--panel);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.welcome-left h1 {
+    color: var(--panel);
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.welcome-left p {
+    color: var(--muted);
+    font-size: 1rem;
+}
+
+.welcome-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--accent);
+    color: var(--panel);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+}
+
+/* Secciones */
+.section { margin-top: 32px; }
+.section-title {
+    text-align: center;
+    color: var(--panel);
+    margin-bottom: 20px;
+}
+
+/* Grid */
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+}
+
+/* Feature Cards */
+.feature {
+    text-align: center;
+    transition: .3s;
+}
+.feature:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+    transform: translateY(-4px);
+}
+.feature-icon {
+    font-size: 2rem;
+    color: var(--panel);
+    margin-bottom: 10px;
+}
+
+/* Accesos */
+.access {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px;
+    background: var(--card);
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    text-decoration: none;
+    color: var(--text);
+    transition: .3s;
+}
+.access:hover {
+    transform: translateX(6px);
+    border-color: var(--panel);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.access-icon {
+    font-size: 1.4rem;
+    background: var(--accent);
+    color: var(--panel);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 12px;
+}
+.access-arrow {
+    margin-left: auto;
+    background: var(--panel);
+    color: #fff;
+    padding: 8px;
+    border-radius: 6px;
+}
+.access:hover .access-arrow {
+    background: var(--accent);
+    color: #222;
+}

@@ -9,10 +9,36 @@
 
   <link rel="stylesheet" href="<c:url value='/css/styles.css'/>" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <style>
+    .alert {
+      padding: 10px 15px;
+      border-radius: 6px;
+      margin-bottom: 15px;
+      font-weight: 600;
+      animation: fadeIn 0.3s ease-in-out;
+    }
+    .alert-success {
+      background: #d1f7d7;
+      border-left: 5px solid #28a745;
+      color: #155724;
+    }
+    .alert-danger {
+      background: #ffd2d2;
+      border-left: 5px solid #dc3545;
+      color: #721c24;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+  </style>
 </head>
+
 <body>
   <div class="app">
-    <!-- Sidebar -->
+
+    <!-- Sidebar (sin cambios) -->
     <aside class="sidebar">
       <div>
         <div class="brand">
@@ -32,7 +58,7 @@
           <a href="<c:url value='/ayuda'/>"><i class="fas fa-question-circle"></i><span>Ayuda</span></a>
         </nav>
       </div>
-      
+
       <div class="profile-mini">
         <div class="avatar-sm">
           <c:if test="${usuario != null}">
@@ -58,6 +84,25 @@
         </div>
       </div>
 
+      <!-- MENSAJES: ahora usamos "success" y "error" (coincide con Controller) -->
+      <c:if test="${not empty success}">
+        <div class="alert alert-success">${success}</div>
+      </c:if>
+
+      <c:if test="${not empty error}">
+        <div class="alert alert-danger">${error}</div>
+      </c:if>
+
+      <!-- PREPARAR URL DEL FORM -->
+      <c:choose>
+        <c:when test="${modoEdicion}">
+          <c:set var="urlForm" value="/categoria/actualizar"/>
+        </c:when>
+        <c:otherwise>
+          <c:set var="urlForm" value="/categoria/crear"/>
+        </c:otherwise>
+      </c:choose>
+
       <!-- Formulario -->
       <section class="card">
         <h3>
@@ -67,12 +112,7 @@
           </c:choose>
         </h3>
 
-        <form action="<c:choose>
-                        <c:when test='${modoEdicion}'><c:url value='/categoria/actualizar'/></c:when>
-                        <c:otherwise><c:url value='/categoria/crear'/></c:otherwise>
-                      </c:choose>"
-              method="post"
-              class="form-grid">
+        <form action="<c:url value='${urlForm}'/>" method="post" class="form-grid">
 
           <div class="form-group">
             <label for="codigoC">Código de categoría</label>
@@ -103,7 +143,6 @@
           </div>
         </form>
       </section>
-
 
       <!-- Tabla -->
       <section class="card">
