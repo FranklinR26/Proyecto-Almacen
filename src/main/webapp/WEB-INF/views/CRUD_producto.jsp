@@ -135,11 +135,6 @@
                  value="${producto.precio}" required/>
         </div>
 
-<<<<<<< HEAD
-=======
-        <!-- STOCK ELIMINADO -->
-
->>>>>>> 8c2572e09d476b9fbaaf81fa09b680d93d84c615
         <div class="form-group">
           <label for="descripcion">Descripción</label>
           <textarea id="descripcion" name="descripcion" rows="2">${producto.descripcion}</textarea>
@@ -171,10 +166,6 @@
               <th>Nombre</th>
               <th>Categoría</th>
               <th>Precio</th>
-<<<<<<< HEAD
-=======
-              <!-- STOCK ELIMINADO -->
->>>>>>> 8c2572e09d476b9fbaaf81fa09b680d93d84c615
               <th>Acciones</th>
             </tr>
           </thead>
@@ -191,12 +182,7 @@
                   </c:forEach>
                 </td>
                 <td>${p.precio}</td>
-<<<<<<< HEAD
-=======
 
-                <!-- STOCK ELIMINADO -->
-
->>>>>>> 8c2572e09d476b9fbaaf81fa09b680d93d84c615
                 <td style="display:flex; gap:5px;">
                   <a href="<c:url value='/producto/editar/${p.idProducto}'/>" class="btn" style="background:#007bff">
                     <i class="fas fa-pen"></i> Editar
